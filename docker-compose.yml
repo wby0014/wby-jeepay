@@ -1,7 +1,7 @@
 version: '3'
 
 # Maven 依赖提前编译，修改 MQ 队列 (修改 jeepay-components-mq 依赖) 也需要重新运行此命令
-# docker build -t jeepay-deps:latest -f docs/Dockerfile .
+# docker build -t jeepay-payment:latest -f jeepay-payment/Dockerfile .
 # 启动命令 docker-compose up
 # 启动并运行在后台  docker-compose up -d
 # 重新编译 docker-compose up --build
@@ -34,17 +34,12 @@ services:
       jeepay:
         ipv4_address: 172.20.0.10
   activemq:
-    build:
-      context: ./docker/activemq
-      dockerfile: Dockerfile
+    image: rmohr/activemq:latest
+    platform: linux/amd64
     hostname: activemq
     container_name: jeepay-activemq
-    image: jeepay-activemq:latest
-    ports: #- "1883:1883"
-      #- "5672:5672"
+    ports:
       - "8161:8161"
-      #- "61613:61613"
-      #- "61614:61614"
       - "61616:61616"
     volumes:
       - activemq:/opt/activemq
