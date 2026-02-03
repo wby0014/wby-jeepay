@@ -1,5 +1,12 @@
 version: '3'
 
+# 本地代理启动docker
+#  colima start \
+#  --env HTTP_PROXY=http://127.0.0.1:7890 \
+#  --env HTTPS_PROXY=http://127.0.0.1:7890 \
+#  --env NO_PROXY=localhost,127.0.0.1 \
+#  --cpu 4 \
+#  --memory 6
 # Maven 依赖提前编译，修改 MQ 队列 (修改 jeepay-components-mq 依赖) 也需要重新运行此命令
 # docker build -t jeepay-payment:latest -f jeepay-payment/Dockerfile .
 # 启动命令 docker-compose up
@@ -8,9 +15,13 @@ version: '3'
 # 重新创建 docker-composer up --force-recreate
 # 重新编译并覆盖之前的 docker-composer up --build --force-recreate
 
-
 # 编译前端请先执行 git submodule updata --init --recursive
 # 或者 git clone https://gitee.com/jeequan/jeepay-ui.git
+
+# 1.构建 docker-compose build --no-cache
+# 2.启动 docker-compose up -d
+# 3. git clone https://gitee.com/jeequan/jeepay-ui.git,重新修改env路径
+# 4. 删除jeepay-ui目录下Dockerfile文件的首行syntax
 
 services:
   mysql:
@@ -34,7 +45,7 @@ services:
       jeepay:
         ipv4_address: 172.20.0.10
   activemq:
-    image: rmohr/activemq:latest
+    image: apache/activemq-classic:latest
     platform: linux/amd64
     hostname: activemq
     container_name: jeepay-activemq
@@ -113,7 +124,7 @@ services:
       - redis:/data
   payment:
     build:
-      context: .
+      context: ./jeepay-payment
       dockerfile: Dockerfile
       args:
         PORT: 9216
@@ -137,7 +148,7 @@ services:
       - ./conf/payment/application.yml:/workspace/application.yml
   manager:
     build:
-      context: .
+      context: ./jeepay-manager
       dockerfile: Dockerfile
       args:
         PORT: 9217
@@ -161,7 +172,7 @@ services:
       - ./conf/manager/application.yml:/workspace/application.yml
   merchant:
     build:
-      context: .
+      context: ./jeepay-merchant
       dockerfile: Dockerfile
       args:
         PORT: 9218

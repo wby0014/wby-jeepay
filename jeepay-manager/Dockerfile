@@ -5,7 +5,7 @@
 # ------   START   ------
 
 # 基础镜像来自： https://hub.docker.com/ 官方OFFICIAL
-FROM openjdk:17
+FROM eclipse-temurin:17
 
 MAINTAINER Terrfly
 
