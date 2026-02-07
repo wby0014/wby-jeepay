@@ -79,7 +79,7 @@ public class MchPayInterfaceConfigController extends CommonCtrl {
     @GetMapping
     public ApiRes<List<PayInterfaceDefine>> list() {
 
-        List<PayInterfaceDefine> list = payInterfaceConfigService.selectAllPayIfConfigListByAppId(getValStringRequired("appId"));
+        List<PayInterfaceDefine> list = payInterfaceConfigService.selectAllPayIfConfigListByAppId(mchInfoService, mchAppService, getValStringRequired("appId"));
         return ApiRes.ok(list);
     }
 

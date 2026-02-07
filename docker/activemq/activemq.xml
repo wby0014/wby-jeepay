@@ -132,15 +132,16 @@
         <!-- Add AuthenticationPlugin -->
         <plugins>
             <!--  简单认证插件 -->
-            <simpleAuthenticationPlugin>
+            <!--<simpleAuthenticationPlugin>
                 <users>
                     <authenticationUser username="test" password="test" groups="users,admins"/>
                     <authenticationUser username="system" password="manager" groups="users,admins"/>
                     <authenticationUser username="user" password="password" groups="users"/>
                     <authenticationUser username="guest" password="password" groups="guests"/>
+                    <authenticationUser username="admin" password="admin" groups="users,admins"/>
                 </users>
             </simpleAuthenticationPlugin>
-
+-->
             <!--  JAAS认证插件
                 <jaasAuthenticationPlugin configuration="activemq-domain" />
             -->

@@ -43,11 +43,11 @@ public class PayInterfaceConfigService extends ServiceImpl<PayInterfaceConfigMap
     @Autowired
     private PayInterfaceDefineService payInterfaceDefineService;
 
-    @Autowired
-    private MchInfoService mchInfoService;
+    /*@Autowired
+    private MchInfoService mchInfoService;*/
 
-    @Autowired
-    private MchAppService mchAppService;
+    /*@Autowired
+    private MchAppService mchAppService;*/
 
     /**
      * @Author: ZhuXiao
@@ -93,7 +93,7 @@ public class PayInterfaceConfigService extends ServiceImpl<PayInterfaceConfigMap
     }
 
 
-    public List<PayInterfaceDefine> selectAllPayIfConfigListByAppId(String appId) {
+    public List<PayInterfaceDefine> selectAllPayIfConfigListByAppId(MchInfoService mchInfoService,MchAppService mchAppService, String appId) {
 
         MchApp mchApp = mchAppService.getById(appId);
         if (mchApp == null|| mchApp.getState() != CS.YES) {

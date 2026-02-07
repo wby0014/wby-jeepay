@@ -45,8 +45,8 @@ public class SysConfigService extends ServiceImpl<SysConfigMapper, SysConfig> im
      * **/
     public static boolean IS_USE_CACHE = false;
 
-    @Autowired
-    private SysConfigService sysConfigService;
+    //@Autowired
+    //private SysConfigService sysConfigService;
 
     /** 数据库application配置参数 **/
     private static MutablePair<String, DBApplicationConfig> APPLICATION_CONFIG = new MutablePair<>("applicationConfig", null);
@@ -97,7 +97,7 @@ public class SysConfigService extends ServiceImpl<SysConfigMapper, SysConfig> im
             SysConfig sysConfig = new SysConfig();
             sysConfig.setConfigKey(k);
             sysConfig.setConfigVal(updateMap.get(k));
-            boolean update = sysConfigService.saveOrUpdate(sysConfig);
+            boolean update = this.saveOrUpdate(sysConfig);
             if (update) {
                 count ++;
             }

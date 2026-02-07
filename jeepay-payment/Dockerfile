@@ -33,7 +33,8 @@ COPY ./target/jeepay-payment.jar /jeepayhomes/service/app/jeepay-payment.jar
 # 设置工作目录
 WORKDIR /jeepayhomes/service/app
 
-CMD ["java", "-jar", "jeepay-payment.jar"]
+#CMD ["java", "-jar", "jeepay-payment.jar"]
+ENTRYPOINT ["java","-jar","jeepay-payment.jar","--spring.config.location=/workspace/application.yml"]
 
 # ------   END   ------
 
