@@ -65,15 +65,15 @@ spring:
       password:
 
 # #activeMQ配置 ( 注意： activeMQ配置项需在spring的下级 )
-  activemq:
-    broker-url: failover:(tcp://activemq:61616?wireFormat.maxInactivityDuration=0)  #连接地址
-    in-memory: false # Jeepay项目不可使用内存模式， 需要连接多个消费者。
-    user: admin # activeMQ默认无需账密认证。 打开认证：activemq.xml添加simpleAuthenticationPlugin标签，账密在credentials.properties文件。
-    password: admin
-    pool:
-      enabled: true
-      max-connections: 10
-      idle-timeout: 30000  # 空闲的连接过期时间，默认为30秒
+#  activemq:
+#    broker-url: failover:(tcp://activemq:61616?wireFormat.maxInactivityDuration=0)  #连接地址
+#    in-memory: false # Jeepay项目不可使用内存模式， 需要连接多个消费者。
+#    user: admin # activeMQ默认无需账密认证。 打开认证：activemq.xml添加simpleAuthenticationPlugin标签，账密在credentials.properties文件。
+#    password: admin
+#    pool:
+#      enabled: true
+#      max-connections: 10
+#      idle-timeout: 30000  # 空闲的连接过期时间，默认为30秒
 #
 #  #rabbitmq配置  ( 注意： rabbitmq配置项需在spring的下级 )
 #  rabbitmq:
@@ -87,6 +87,10 @@ spring:
 #rocketmq:
 #  name-server: 172.20.0.11:9876
 #  producer:
+rocketmq:
+  name-server: rocketmq-namesrv:9876
+  producer:
+    group: JEEPAY-GROUP
 
 ## 阿里云rocketmq配置 ( 注意：aliyun-rocketmq配置项请放置到根目录， 不是spring的二级配置！需要阿里云开通rocketMQ产品，创建Group和Topic  )
 #aliyun-rocketmq:
@@ -153,5 +157,5 @@ isys:
       access-key-secret: SECRET_SECRET_SECRET  #AccessKeySecret
 
   mq:
-    vender: activeMQ  #  切换MQ厂商， 支持：【 activeMQ  rabbitMQ  rocketMQ  aliYunRocketMQ 】， 需正确配置 【对应的yml参数】 和 【jeepay-components-mq项目下pom.xml中的依赖包】。
+    vender: rocketMQ  #  切换MQ厂商， 支持：【 activeMQ  rabbitMQ  rocketMQ  aliYunRocketMQ 】， 需正确配置 【对应的yml参数】 和 【jeepay-components-mq项目下pom.xml中的依赖包】。
 

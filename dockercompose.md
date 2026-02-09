@@ -68,6 +68,11 @@ docker-compose up --build
 * Dockerfile 变更
 * 依赖有调整
 
+### 🔁 常规重新构建必须服务（不使用缓存）
+```bash
+docker-compose build --no-cache payment manager merchant
+```
+
 ---
 
 ### ♻️ 强制重建容器（不重新 build 镜像）
